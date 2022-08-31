@@ -41,31 +41,35 @@ def nth_root_numpy(x, n=2):
     return np.power(x, (1 / n))
 
 # Calculating the base weekly rates from yearly.
-yearly_apy = 1.06 # conservative.
-weekly_apy = nth_root(yearly_apy, 52, prec=0.000001)
+yearly_apy = 1.07 # conservative.
+unit_period = 52 # breakup of interest payments
+weekly_apy = nth_root(yearly_apy, unit_period, prec=0.000001)
+print("> Period APY is", weekly_apy)
 
 # Configurables.
 weekly_deposit = 500
+unitly_deposit = (52 / unit_period) * weekly_deposit
+
 value = 0 # running value
 contributions = 0
 years = 10
-weeks = years*52
+units = years*unit_period
 
 # Plot information.
 plot_contributions = [[], []] # running contributions
 plot_value = [[], []] # running value of fund
 
 # Simulate.
-for i in range(weeks):
+for i in range(units):
     # Run through weekly actions. Apply interest first.
     value *= weekly_apy
-    contributions += weekly_deposit
-    value += weekly_deposit
+    contributions += unitly_deposit
+    value += unitly_deposit
 
     # Add plottable values.
-    plot_contributions[0].append(i)
+    plot_contributions[0].append(i/unit_period)
     plot_contributions[1].append(contributions)
-    plot_value[0].append(i)
+    plot_value[0].append(i/unit_period)
     plot_value[1].append(value)
 
 # Plot contributions and values.
