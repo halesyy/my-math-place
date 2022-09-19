@@ -12,9 +12,9 @@ amount vs upfront capital.
 """
 
 # Inputs.
-interest_rate = 0.06 # 6% APY
-principal = 150_000 # $100,000
-pay_per_week = 500
+interest_rate = 0.07 # 6% APY
+principal = 35_000 # $100,000
+pay_per_week = 150
 
 # A list of all days in month.
 month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -46,10 +46,12 @@ while running_balance > 0:
 
 # Calculate after-the-fact.
 total_interest_paid = total_paid - principal
-delta = total_paid / principal
+delta = total_paid / principal # this is your % over principal
 
 print(f"> This loan took:")
 print(f"> {floor(months/12)} years and {months%12} months")
 print(f"> Total interest paid was {total_interest_paid}")
 print(f"> Total paid {total_paid}")
 print(f"> Delta: {delta}")
+print("-------------")
+print(f"> This means youre paying a {total_interest_paid/months*12} yearly premium to own this now")
