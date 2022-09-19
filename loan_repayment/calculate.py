@@ -14,7 +14,7 @@ amount vs upfront capital.
 # Inputs.
 interest_rate = 0.07 # 6% APY
 principal = 35_000 # $100,000
-pay_per_week = 150
+pay_per_week = 200
 
 # A list of all days in month.
 month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -44,9 +44,18 @@ while running_balance > 0:
 
             months += 1 # add month 
 
+            if running_balance <= 0:
+                  break
+
+# Off-balance the extra payment.
+extra_payment = abs(running_balance)
+running_balance = 0 # balance back to 0
+total_paid -= extra_payment
+
 # Calculate after-the-fact.
 total_interest_paid = total_paid - principal
 delta = total_paid / principal # this is your % over principal
+
 
 print(f"> This loan took:")
 print(f"> {floor(months/12)} years and {months%12} months")
